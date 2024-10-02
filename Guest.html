@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip Frenzy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #2A0134; /* Purple background */
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 450px;
+            height: 450px;
+            object-fit: cover; /* Ensures the image fills the space while maintaining aspect ratio */
+        }
+
+        .content {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 90px;
+            font-family: 'Impact', sans-serif;
+            color: #fff; /* Change heading color to white for better contrast */
+            letter-spacing: 5px;
+            margin-bottom: 40px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        button {
+            width: 600px;
+            padding: 40px;
+            background-color: #888;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            font-size: 32px;
+            font-weight: bold;
+            font-family: 'Arial', sans-serif;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 50px;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        a {
+            text-decoration: none; /* Remove underline from link */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="C:/Users/iligan-ce/Downloads/ppsh/Untitled3r.jpg" alt="Logo">
+        </div>
+        <div class="content">
+            <img src="C:/Users/iligan-ce/Downloads/ppsh/FLIPFRENZY.gif" alt="Logo">
+            <div class="buttons">
+                <button>Play</button>
+                <a href="Settings.html"><button>Settings</button></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

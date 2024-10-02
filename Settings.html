@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe Layout</title>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #2A0134; /* Updated background color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 100%; /* Use full width */
+            max-width: 1200px;
+            position: relative; /* Allow positioning of elements */
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background-color: gray;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            position: absolute;
+            top: 10px;
+            left: 10px; /* Position to the upper left */
+        }
+
+        .header, .button, .footer-button {
+            background-color: #4A0072; /* Updated button color */
+            color: white;
+            border-radius: 20px;
+        }
+
+        .header {
+            padding: 15px 0;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .progress-bar-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            justify-content: space-between; /* Space between elements */
+        }
+
+        .button {
+            padding: 10px 20px;
+            margin-right: 20px;
+            white-space: nowrap; /* Prevent text wrapping */
+            width: 150px; /* Fixed width for both buttons */
+            text-align: center; /* Center text */
+        }
+
+        .progress-bar {
+            position: relative;
+            background-color: #CBC3E3; /* Updated progress bar color */
+            width: 90%; /* Adjust width of the progress bar */
+            height: 70px;
+            border-radius: 20px;
+            overflow: hidden; /* Ensure the slider is contained within the bar */
+        }
+
+        .progress {
+            background-color: #966fd6; /* Updated adjustable bar color */
+            height: 100%;
+            border-radius: 20px;
+        }
+
+        .percentage {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-weight: bold;
+        }
+
+        .slider {
+            position: absolute;
+            top: 0; /* Align with the top of the progress bar */
+            left: 0; /* Align with the left of the progress bar */
+            width: 100%; /* Make it fill the entire width */
+            height: 50px; /* Match the height of the progress bar */
+            -webkit-appearance: none; /* Remove default appearance */
+            background: transparent; /* Make the background transparent */
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none; /* Remove default appearance */
+            appearance: none;
+            width: 15px; /* Set thumb width */
+            height: 15px; /* Set thumb height */
+            border-radius: 50%; /* Round the thumb */
+            background: gray; /* Thumb color */
+            cursor: pointer; /* Change cursor to pointer */
+        }
+
+        .slider::-moz-range-thumb {
+            width: 15px; /* Set thumb width */
+            height: 15px; /* Set thumb height */
+            border-radius: 50%; /* Round the thumb */
+            background: gray; /* Thumb color */
+            cursor: pointer; /* Change cursor to pointer */
+        }
+
+        .footer-button {
+            text-align: center;
+            padding: 10px 0;
+            width: 120px; /* Match the width with the other buttons */
+            margin: 20px auto;
+            position: relative; /* Allow absolute positioning of elements */
+        }
+
+        .footer-button-container {
+            display: flex;
+            justify-content: flex-start; /* Align footer button to the left */
+            margin-top: 20px; /* Space from progress bars */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo Section -->
+        
+
+        <!-- Header Section -->
+        <div class="header">
+            <span>Settings</span>
+        </div>
+
+        <!-- Progress Bar 1 -->
+        <div class="progress-bar-container">
+            <div class="button">Volume</div>
+            <div class="progress-bar">
+                <div class="progress" id="volume-progress" style="width: 75%;"></div>
+                <span class="percentage" id="volume-percentage">75%</span>
+                <input type="range" class="slider" id="volume-slider" min="0" max="100" value="75">
+            </div>
+        </div>
+
+        <!-- Progress Bar 2 -->
+        <div class="progress-bar-container">
+            <div class="button">Sound Effects</div>
+            <div class="progress-bar">
+                <div class="progress" id="sound-progress" style="width: 75%;"></div>
+                <span class="percentage" id="sound-percentage">75%</span>
+                <input type="range" class="slider" id="sound-slider" min="0" max="100" value="75">
+            </div>
+        </div>
+
+        <!-- Footer Button -->
+        <div class="footer-button-container">
+            <div class="footer-button" id="reset-button">
+                <span>Reset Settings</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to update progress bar based on slider value
+        function updateProgress(slider, progressBar, percentageText) {
+            const value = slider.value;
+            progressBar.style.width = value + '%';
+            percentageText.textContent = value + '%';
+        }
+
+        // Volume slider event listener
+        const volumeSlider = document.getElementById('volume-slider');
+        const volumeProgress = document.getElementById('volume-progress');
+        const volumePercentage = document.getElementById('volume-percentage');
+        
+        volumeSlider.addEventListener('input', function() {
+            updateProgress(volumeSlider, volumeProgress, volumePercentage);
+        });
+
+        // Sound effects slider event listener
+        const soundSlider = document.getElementById('sound-slider');
+        const soundProgress = document.getElementById('sound-progress');
+        const soundPercentage = document.getElementById('sound-percentage');
+
+        soundSlider.addEventListener('input', function() {
+            updateProgress(soundSlider, soundProgress, soundPercentage);
+        });
+
+        // Reset settings button event listener
+        document.getElementById('reset-button').addEventListener('click', function() {
+            volumeSlider.value = 75; // Reset volume to 75%
+            soundSlider.value = 75; // Reset sound effects to 75%
+            updateProgress(volumeSlider, volumeProgress, volumePercentage); // Update UI
+            updateProgress(soundSlider, soundProgress, soundPercentage); // Update UI
+        });
+    </script>
+</body>
