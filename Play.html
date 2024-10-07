@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Layout</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #2A0134; /* Matches the background from Settings.html */
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button {
+            width: 150px;
+            height: 150px;
+            background-color: #CBC3E3; /* Button color as per Settings.html */
+            border: none;
+            border-radius: 20px;
+            font-size: 48px;
+            color: black;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #9f8ecf;
+        }
+
+        .return-button {
+            background-color: trasnparent;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20%;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+        }
+
+        .return-button img {
+            width: 60px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Return Button -->
+    <div class="return-button">
+        <a href="javascript:history.back()">
+            <img src="C:/Users/iligan-ce/Downloads/ppsh/BackButton.png" alt="Back Button">
+        </a>
+    </div>
+
+    <!-- Buttons Grid -->
+    <div class="container">
+        <a href="Level1.html"><button>1</button></a>
+        <button class="button">2</button>
+        <button class="button">3</button>
+        <a href="Level4.html"><button>4</button></a>
+        <button class="button">5</button>
+        <button class="button">6</button>
+        <button class="button">7</button>
+        <button class="button">8</button>
+    </div>
+</body>
+</html>

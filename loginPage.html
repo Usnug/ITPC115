@@ -26,11 +26,41 @@
             align-items: center;
         }
 
-        .logo img {
+        .logo {
             width: 450px;
             height: 450px;
-            object-fit: cover; /* Ensures the image fills the space while maintaining aspect ratio */
-            
+            perspective: 1000px; /* Enables 3D flip effect */
+            cursor: pointer;
+        }
+
+        .logo-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s; /* Smooth flipping */
+        }
+
+        .logo.is-flipped .logo-inner {
+            transform: rotateY(180deg); /* Flip effect */
+        }
+
+        .logo-front, .logo-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden; /* Hides the back when not visible */
+        }
+
+        .logo-front {
+            background: url('C:/Users/iligan-ce/Downloads/ppsh/Untitled3r.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .logo-back {
+            background: url('C:/Users/iligan-ce/Downloads/ppsh/Itwasme.jpg') no-repeat center center;
+            background-size: cover;
+            transform: rotateY(180deg); /* Back image is rotated to be behind initially */
         }
 
         .content {
@@ -52,7 +82,7 @@
         }
 
         button {
-            width: 400px;
+            width: 600px;
             padding: 15px;
             background-color: #888;
             color: white;
@@ -67,19 +97,99 @@
         button:hover {
             background-color: #555;
         }
+
+        /* Style for Guest anchor link */
+        a.guest-link {
+            display: inline-block;
+            text-decoration: none;
+            width: 600px;
+            padding: 15px;
+            background-color: #888;
+            color: white;
+            border-radius: 40px;
+            font-size: 24px;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        a.guest-link:hover {
+            background-color: #555;
+        }
     </style>
+    <!-- Firebase SDK -->
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+      import { getAuth, GoogleAuthProvider, FacebookAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyDxF49Gx45asvEqKhhPGvkTnFTB9QFdI1c",
+        authDomain: "spitfire-samples.firebaseapp.com",
+        projectId: "spitfire-samples",
+        storageBucket: "spitfire-samples.appspot.com",
+        messagingSenderId: "130713291723",
+        appId: "1:130713291723:web:584f78d4eacb329101844e"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth();
+
+      // Google Login
+      document.getElementById('google-login').addEventListener('click', function() {
+          const provider = new GoogleAuthProvider();
+          signInWithPopup(auth, provider)
+              .then(result => {
+                  console.log(result.user);
+                  alert("Logged in successfully with Google!");
+              })
+              .catch(error => {
+                  console.error(error);
+                  alert("Google login failed: " + error.message);
+              });
+      });
+
+      // Facebook Login
+      document.getElementById('facebook-login').addEventListener('click', function() {
+          const provider = new FacebookAuthProvider();
+          signInWithPopup(auth, provider)
+              .then(result => {
+                  console.log(result.user);
+                  alert("Logged in successfully with Facebook!");
+              })
+              .catch(error => {
+                  console.error(error);
+                  alert("Facebook login failed: " + error.message);
+              });
+      });
+
+      // Flip Logo Functionality
+      document.addEventListener('DOMContentLoaded', () => {
+          const logo = document.querySelector('.logo');
+
+          logo.addEventListener('click', () => {
+              logo.classList.toggle('is-flipped');
+          });
+      });
+    </script>
 </head>
 <body>
     <div class="container">
-        <div class="logo">
-            <img src="C:/Users/iligan-ce/Downloads/ppsh/Untitled3r.jpg" alt="Logo">
+        <div class="logo" id="logo">
+            <div class="logo-inner">
+                <div class="logo-front"></div>
+                <div class="logo-back"></div>
+            </div>
         </div>
         <div class="content">
             <h1>FLIP FRENZY</h1>
             <div class="buttons">
-                <button>Google</button>
-                <button>Facebook</button>
-                <button>Guest</button>
+                <button id="google-login"> Google</button>
+                <button id="facebook-login"> Facebook</button>
+                <!-- Guest link as an anchor tag -->
+                <a href="Guest.html" class="guest-link">Guest</a>
             </div>
         </div>
     </div>
